@@ -1,0 +1,14 @@
+
+services:
+
+  mqtt-broker:
+    image: eclipse-mosquitto:2.0.15
+    volumes:
+      - type: bind
+        source: ./mqtt-broker/mosquitto/config
+        target: /mosquitto/config
+    ports:
+      - '1883:1883'
+      - '8080:8080'
+    restart: always
+

@@ -12,3 +12,13 @@ services:
       - '8080:8080'
     restart: always
 
+  db:
+    image: redis:7.0.7
+    volumes:
+      - type: bind
+        source: ./db/redis
+        target: /usr/local/etc/redis
+    ports:
+      - '6379:6379'
+    restart: always
+

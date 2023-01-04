@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "doljara-servers-service"
+version = "0.1.0"
+description = ""
+authors = ["しましまer <109348950+stripe-island@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "doljara_servers_service"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+paho-mqtt = "1.6.1"
+redis = "4.4.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

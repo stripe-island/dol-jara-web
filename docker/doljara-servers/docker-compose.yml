@@ -7,18 +7,34 @@ services:
       - type: bind
         source: ./mqtt-broker/mosquitto/config
         target: /mosquitto/config
-    ports:
-      - '1883:1883'
-      - '8080:8080'
+    network_mode: host
     restart: always
 
+  service:
+    build:
+      context: ./service
+      network: host
+    environment:
+      - MQTT_BROKER_HOST=localhost
+      - MQTT_BROKER_PORT=1883
+      - MQTT_USERNAME=doljara-clients
+      - MQTT_PASSWORD=XXXXXXXXXXXXXXXXXXXX
+      - REDIS_HOST=localhost
+      - REDIS_PORT=6379
+    network_mode: host
+    restart: always
+    depends_on:
+      mqtt-broker:
+        condition: service_started
+      db:
+        condition: service_started
+
   db:
-    image: redis:7.0.7
+    image: redis:7.0.7-alpine
     volumes:
       - type: bind
         source: ./db/redis
         target: /usr/local/etc/redis
-    ports:
-      - '6379:6379'
+    network_mode: host
     restart: always
 
